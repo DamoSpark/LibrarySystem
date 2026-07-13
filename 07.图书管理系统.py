@@ -1,6 +1,6 @@
 """
-某社区图书馆需要开发一个简单的图书管理系统。系统需要支持会员登录、图书借阅、图书归还等功能。系统中有两种类型的会员:
-普通会员和VIP会员,他们的借书权限不同。你需要使用面向对象编程的思想,设计并实现这个图书管理系统。
+图书馆需要开发一个简单的图书管理系统。系统需要支持会员登录、图书借阅、图书归还等功能。系统中有两种类型的会员:
+普通会员和VIP会员,他们的借书权限不同。需要使用面向对象编程的思想,设计并实现这个图书管理系统。
 核心功能:
         1. 会员登录:会员通过卡号和密码登录系统
         2. 借书:会员可以借阅库存中有余量的图书
@@ -53,8 +53,6 @@ class Member(ABC):
         self.__borrow_book=[]               # 每个会员借的书装起来
 
     #会员借书
-    #book只是形参"占位符",当调用Books里面的方法的时候,
-    # 需要传入一个Books类型的对象,这个对象会被赋值给book.对象可以调用Books方发
     def borrow_book(self,book : Books):
         # 会员借书数量是否已超过最大限制数
         if len(self.__borrow_book) >= self.get_max_books():
@@ -86,7 +84,7 @@ class Member(ABC):
         return self.__borrow_book
 
     #借阅书籍的最多数量(要在子类实现)
-    @abstractmethod  #装饰器
+    @abstractmethod  
     def get_max_books(self) -> int:
         pass
 
@@ -147,8 +145,8 @@ class LibrarySystem:
 
           password = input("请输入会员密码:")
           # 密码是否正确
-          member = self.members[card_number]  # 获取到了会员的信息, 拿到的是卡号这个key的整个对象,所以能用方法
-          if member.get___password() == password:  #有了所有信息才能查找密码
+          member = self.members[card_number] 
+          if member.get___password() == password:  
               print(f"登录成功!欢迎您{member.name}~")
               self.now_member = member
               return True
@@ -159,7 +157,7 @@ class LibrarySystem:
      #借阅图书
     def borrow_books(self):
         #1.展示当前图书列表
-        for book in self.books.values():  #只获取价值,也就是对象
+        for book in self.books.values():  
             print(f"编码:{book.code},标题:{book.headline},作者{book.author},总数:{book.total_num},可用数量:{book.get_available_quantity()}")
 
      #2.输入图书编号借书
